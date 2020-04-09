@@ -1,0 +1,28 @@
+{
+  "name": "image-classification",
+  "version": "1.0.0",
+  "description": "Image classification with ml5.js",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateustizotti/ml5-projects.git"
+  },
+  "keywords": [
+    "ml5",
+    "js",
+    "machine",
+    "learning"
+  ],
+  "author": "Mateus Tizotti",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mateustizotti/ml5-projects/issues"
+  },
+  "homepage": "https://github.com/mateustizotti/ml5-projects#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
