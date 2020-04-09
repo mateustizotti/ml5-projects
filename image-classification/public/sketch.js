@@ -1,29 +1,47 @@
 let mobilenet;
-let img;
+let video;
+let label = '';
+let confidence = '';
+let resultsP;
 
 function preload() {
-    mobilenet = ml5.imageClassifier('MobileNet', modelReady());
-    img = loadImage('../images/penguin.jpg');
-
-}
-function modelReady() {
-    console.log("Model is Ready!!");
     
+    video = createCapture(VIDEO);
+    video.hide();
+
 }
 
 function setup() {
-    createCanvas(600, 600);
-    mobilenet.classify(img, (err, result) => {
-        if (err) {
-            console.error("Error!");
-        } else {
-            console.log(result);
-            let label = result[0].label;
-            let confidence = result[0].confidence * 100;
-            createDiv('Label: ' + label);
-            createDiv('Confidence: ' + nf(confidence, 2, 2) + '%');
-        }
-    });
+    noCanvas();
+    video = createCapture(VIDEO);
+    mobilenet = ml5.imageClassifier('MobileNet', video, modelReady);
+    resultsP = createP('Loading model and video...');
+}
 
-    image(img, 0, 0, width, height);
+
+function modelReady() {
+    console.log("Model is Ready!!");
+    classifyVideo();
+}
+
+function classifyVideo() {
+    mobilenet.classify(gotResults);
+}
+
+function gotResults(err, result) {
+    if (err) {
+        console.error("Error!");
+    } else {
+        label = result[0].label;
+        confidence = result[0].confidence * 100;
+        resultsP.html('Label: ' + label + ' ' + 'Confidence: ' + nf(confidence, 2, 2) + '%');
+        classifyVideo();
+    }
+}
+
+
+
+function draw() {
+    image(video, 0, 0, width, height);
+    document.get
 }
